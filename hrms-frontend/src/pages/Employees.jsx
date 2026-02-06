@@ -1,54 +1,20 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+return (
+  <>
+    <div className="header">
+      <h1>HRMS Lite</h1>
+      <p>Simple Human Resource Management System</p>
+    </div>
 
-const API = import.meta.env.VITE_API_URL;
+    <div className="container">
+      <h2 className="section-title">Employees</h2>
 
-export default function Employees() {
-  const [data, setData] = useState([]);
-  const [form, setForm] = useState({
-    employeeId: "",
-    fullName: "",
-    email: "",
-    department: ""
-  });
-
-  const fetchData = async () => {
-    const res = await axios.get(`${API}/employees`);
-    setData(res.data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    await axios.post(`${API}/employees`, form);
-
-    setForm({
-      employeeId: "",
-      fullName: "",
-      email: "",
-      department: ""
-    });
-
-    fetchData(); // refresh list
-  };
-
-  return (
-    <>
-      <h2>Employees</h2>
-
-      {/* Add Employee Form */}
-      <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
+      <form onSubmit={handleSubmit}>
         <input
           placeholder="Employee ID"
           value={form.employeeId}
           onChange={(e) => setForm({ ...form, employeeId: e.target.value })}
           required
         />
-        <br />
 
         <input
           placeholder="Full Name"
@@ -56,7 +22,6 @@ export default function Employees() {
           onChange={(e) => setForm({ ...form, fullName: e.target.value })}
           required
         />
-        <br />
 
         <input
           type="email"
@@ -65,7 +30,6 @@ export default function Employees() {
           onChange={(e) => setForm({ ...form, email: e.target.value })}
           required
         />
-        <br />
 
         <input
           placeholder="Department"
@@ -73,19 +37,32 @@ export default function Employees() {
           onChange={(e) => setForm({ ...form, department: e.target.value })}
           required
         />
-        <br />
 
         <button type="submit">Add Employee</button>
       </form>
 
-      {/* Employee List */}
+      <h3 className="section-title" style={{ marginTop: "30px" }}>
+        Employee List
+      </h3>
+
       {data.length === 0 && <p>No employees</p>}
 
       {data.map((emp) => (
-        <div key={emp._id}>
-          {emp.fullName} - {emp.department}
+        <div className="employee-card" key={emp._id}>
+          <img
+            src="https://randomuser.me/api/portraits/men/32.jpg"
+            alt="employee"
+          />
+          <div>
+            <strong>{emp.fullName}</strong>
+            <div>{emp.department}</div>
+          </div>
         </div>
       ))}
-    </>
-  );
-}
+    </div>
+
+    <div className="footer">
+      © 2026 HRMS Lite · Built with React & Node
+    </div>
+  </>
+);
