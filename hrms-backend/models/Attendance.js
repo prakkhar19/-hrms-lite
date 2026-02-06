@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 
-const EmployeeSchema = new mongoose.Schema({
-  employeeId: { type: String, unique: true, required: true },
-  fullName: { type: String, required: true },
-  email: { type: String, unique: true, required: true },
-  department: { type: String, required: true }
-}, { timestamps: true });
+const AttendanceSchema = new mongoose.Schema({
+  employeeId: { type: String, required: true },
+  date: { type: String, required: true },
+  status: { type: String, enum: ["Present", "Absent"], required: true }
+});
 
-module.exports = mongoose.model("Employee", EmployeeSchema);
+module.exports = mongoose.model("Attendance", AttendanceSchema);
