@@ -27,8 +27,6 @@ Live Links
 
 Live App: https://hrms-lite-git-main-prakhars-projects-97ee8cfa.vercel.app/
 
-Backend API: https://hrms-backend-unhd.onrender.com
-
 GitHub Repo: https://github.com/prakkhar19/-hrms-lite
 
 Run Locally (Quick)
